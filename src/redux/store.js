@@ -17,7 +17,6 @@ const store = configureStore({
     contacts: persistedContactsReducer,
     filters: filtersReducer,
   },
-
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,

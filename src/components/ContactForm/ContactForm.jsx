@@ -1,7 +1,7 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsSlice";
+import { addContact } from "../../redux/contactsOps";
 import styles from "./ContactForm.module.css";
 
 const ContactForm = () => {
@@ -38,20 +38,16 @@ const ContactForm = () => {
     setFieldValue("number", phoneValue);
   };
 
+  const handleSubmit = (values, { resetForm }) => {
+    dispatch(addContact(values));
+    resetForm();
+  };
+
   return (
     <Formik
       initialValues={{ name: "", number: "" }}
       validationSchema={validationSchema}
-      onSubmit={(values, { resetForm }) => {
-        dispatch(
-          addContact({
-            id: Date.now().toString(),
-            name: values.name,
-            number: values.number,
-          })
-        );
-        resetForm();
-      }}
+      onSubmit={handleSubmit}
     >
       {({ setFieldValue }) => (
         <Form className={styles.form}>
