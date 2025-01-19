@@ -4,11 +4,12 @@ import { fetchContacts } from "./redux/contactsOps";
 import ContactForm from "./components/ContactForm/ContactForm";
 import SearchBox from "./components/SearchBox/SearchBox";
 import ContactList from "./components/ContactList/ContactList";
+import { selectNameFilter } from "./redux/filtersSlice";
 
 function App() {
   const dispatch = useDispatch();
   const contacts = useSelector((state) => state.contacts.items);
-  const filter = useSelector((state) => state.filters.name);
+  const filter = useSelector(selectNameFilter);
   const loading = useSelector((state) => state.contacts.loading);
   const error = useSelector((state) => state.contacts.error);
 
